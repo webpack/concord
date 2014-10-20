@@ -126,7 +126,7 @@ var content = require("./file.html");
 
 
   
-# [webpack 1.x](http://webpack.github.io/)
+### [webpack 1.x](http://webpack.github.io/)
 
 In a pre-app configuration file (webpack.config.js) you configure loaders for files. Modules that use different module types need to tell the app author to add the right loaders to the configuration file. A 
 
@@ -364,8 +364,10 @@ The **modification type** explains how the original export is modified.
 * `object`: any javascript object (or primive value) is exported
 * `data`: data (no code: no functions or modified getter/setter)
   * `+immutable`: data will never be changed (allows optimizations like inlining)
+* `template-function`: a function returning a string is exported
+* `class`: a javascript constructor is exported
 * `stylesheet`: css rules are applied to the document
-* `stylesheet-rc`: stylesheet wrapped in a reference-counted container.
+* `rc-stylesheet`: stylesheet wrapped in a reference-counted container.
 * `text`: exported string
 * `url`: an URL
 
@@ -375,3 +377,41 @@ The **modification type** explains how the original export is modified.
   * `+eager`: thing is not loaded on demand
   * `+lazy`: thing is loaded on demand
 
+### application configuration
+
+On application-level there need to be some mechanism to bind module types to preprocessing instructions. This is handled by the build system.
+
+I. e. with webpack 2.x the application author can match module types to loaders:
+
+``` javascript
+{
+	"stylesheet/less": "style-loader!css-loader!less-loader",
+	"*/javascript+commonjs+amd": "",
+	"*/javascript+global": "imports-loader?this=>window",
+	"url/image+lossless+lossy+descriptive+pixels": "file-loader?name=img/[hash:10].[ext]",
+	"url/font": "file-loader?name=font/[hash:10].[ext]",
+	"promise+lazy/*": "promise-loader",
+}
+```
+
+### application configuration database
+
+There is a database for each build system, that provides defaults for most module types. So by default there is no application-level configuration required, but you can override it or provide additional module types.
+
+The database delegates installing of required dependencies to the package manager. So the user don't need to care about dependencies the build system requires for preprocessing stuff. It need to be allowed to install and use multiple versions of the same dependency.
+
+i. e. webpack 2.x
+
+``` javascript
+{
+	"stylesheet/less": {
+		value: "style-loader!css-loader!less-loader",
+		dependencies: {
+			"style-loader": "~0.8.2",
+			"css-loader": "~0.8.1",
+			"less-loader": "~0.6.0",
+		}
+	}
+	// ...
+}
+```
