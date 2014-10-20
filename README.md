@@ -415,3 +415,7 @@ i. e. webpack 2.x
 	// ...
 }
 ```
+
+# webpack 2.x
+
+webpack 2.x will support moodle. Loaders will get the internal preprocessing format for moodle with webpack.
