@@ -1,6 +1,6 @@
 # moodle
 
-A spec for modules. Non-final name: `moodle`
+A spec for modules. Non-final **temporary** working name: `moodle`
 
 ## Goals
 
@@ -69,6 +69,7 @@ var content = "<html><body><img src=\"image.png\"></body></html>";
 #### positive
 
 * prefect node.js compatibility
+* already many modules in npm
 * nothing need to be configured on application level to use modules
 
 #### negative
@@ -78,7 +79,7 @@ var content = "<html><body><img src=\"image.png\"></body></html>";
 * the transform need to load and parse each code file to find dependencies.
   Multiple transforms means the code is parsed multiple times. Performance!
 * You need to repeat yourself when using many files of the same module type
-* browserify specific transform syntax, difficult to implement a new build system
+* transforms are too simple to handle complex tasks, i. e. depending on more files
 
 #### open questions
 
@@ -163,6 +164,12 @@ module.exports = "/path/6f87a6b7e188b838e842ab23.png"
 
 
 ## moodle
+
+### How it's different
+
+Existing stuff defines how modules are processed on package-level. With moodle the package defines only the type of modules and doesn't define how it's processed. How the different types of modules are processed is defined on application-level. Useful defaults for each module type ensure that packages are useable without configuration.
+
+The indirect mapping from *file* to *module type* to *processing logic* ensures that packages are independent of build system and *module processors*. It also makes sure that the application has the ultimate control over module processing.
 
 ### definitions
 
