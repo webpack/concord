@@ -1,6 +1,6 @@
-# moodle
+# concord
 
-A spec for modules. Non-final **temporary** working name: `moodle`
+A spec for modules. concord modules.
 
 ## Goals
 
@@ -23,7 +23,7 @@ A spec for modules. Non-final **temporary** working name: `moodle`
   * server (node.js)
   * browser plugin
   * standalone GUI app (node-webkit, atom-shell)
-* Allow the application using the moodles to specify/override how different module types are handled. i. e.
+* Allow the application using the concords to specify/override how different module types are handled. i. e.
   * images as DataUrl or as file
   * stylesheets inlined or as separate file
   * code/template/images minimized or with SourceMap
@@ -35,10 +35,10 @@ A spec for modules. Non-final **temporary** working name: `moodle`
 * Allow the module author to conditionally use modules depending on module type and feature support of the build system.
 * Allow to specify custom module types.
 * Don't make to build unnecessary complex to allow fast builds.
-* A moodle should be useable after installing. The user (app author or other module authors) shouldn't need to configure special preprocessing.
+* A concord should be useable after installing. The user (app author or other module authors) shouldn't need to configure special preprocessing.
 * Easy to configure for app and module authors
-* Easy to add moodle support for existing modules
-* moodle shouldn't be a package manager. Instead it should reuse an existing package manager (i. e. npm).
+* Easy to add concord support for existing modules
+* concord shouldn't be a package manager. Instead it should reuse an existing package manager (i. e. npm).
 
 ## Existing stuff
 
@@ -163,11 +163,11 @@ module.exports = "/path/6f87a6b7e188b838e842ab23.png"
 
 
 
-## moodle
+## concord
 
 ### How it's different
 
-Existing stuff defines how modules are processed on package-level. With moodle the package defines only the type of modules and doesn't define how it's processed. How the different types of modules are processed is defined on application-level. Useful defaults for each module type ensure that packages are useable without configuration.
+Existing stuff defines how modules are processed on package-level. With concord the package defines only the type of modules and doesn't define how it's processed. How the different types of modules are processed is defined on application-level. Useful defaults for each module type ensure that packages are useable without configuration.
 
 The indirect mapping from *file* to *module type* to *processing logic* ensures that packages are independent of build system and *module processors*. It also makes sure that the application has the ultimate control over module processing.
 
@@ -182,7 +182,7 @@ The indirect mapping from *file* to *module type* to *processing logic* ensures 
 
 ``` javascript
 {
-	"moodle": {
+	"concord": {
 		"main": "./main",
 		"[server] main": "./server-main",
 		"extensions": ["", ".js", ".coffee", ".less"],
@@ -199,7 +199,7 @@ The indirect mapping from *file* to *module type* to *processing logic* ensures 
 		"modules": {
 			"config": "./default-config",
 			"[web] config": "./web-config",
-			"./file": "./moodle-file",
+			"./file": "./concord-file",
 			"./ignored": false
 		}
 	}
@@ -208,7 +208,7 @@ The indirect mapping from *file* to *module type* to *processing logic* ensures 
 
 #### file
 
-The moodle configuration can be in the package manager configuration file.
+The concord configuration can be in the package manager configuration file.
 
 Examples:
 
@@ -254,17 +254,17 @@ Example configuration:
 
 By default `promise/*` is used for `large-file`, but if lazy-loading (`promise+lazy/*`) is supported this is used for `web` environment. For a `server` environment the lazy-loading is disabled (`promise+eager/*`). If building for `web` and `server` environment lazy-loading is disabled, because it's later specified in the configuration.
 
-#### `moodle`
+#### `concord`
 
-Every `moodle` option in scoped with this key. This ensures that moodle doesn't conflict with other configuration.
+Every `concord` option in scoped with this key. This ensures that concord doesn't conflict with other configuration.
 
-The only allowed keys in this object are: `main`, `extensions`, `types` and `modules`. When the build system find other keys it should fail assuming there is a newer moodle version, which is not supported by this build system.
+The only allowed keys in this object are: `main`, `extensions`, `types` and `modules`. When the build system find other keys it should fail assuming there is a newer concord version, which is not supported by this build system.
 
 #### `main`
 
 When the request resolve to the main directory of this package (the directory of the configuration file), the content of the `main` field is resolved relative to the package directory (Meaning `./` is required for relative paths).
 
-The `main` field from the moodle configuration defaults package manager configuration module entry point. i. e. `main` in `package.json` or `"./index"`.
+The `main` field from the concord configuration defaults package manager configuration module entry point. i. e. `main` in `package.json` or `"./index"`.
 
 #### `extensions`
 
@@ -303,7 +303,7 @@ The *keys* of the object are threaded equally to the *keys* in `modules` above.
 
 The *value* specifies the module type. The entries are processed in order from top to bottom. When a entry is matched the module type is set to the *value*. `*` in the *value* is replaced with the previous *value*.
 
-For a module *key* the previous value is obtained from the modules' moodle configuration.
+For a module *key* the previous value is obtained from the modules' concord configuration.
 
 The value defaults to `object/javascript` for `*.js` and to `object/json` for `*.json`.
 
@@ -425,4 +425,4 @@ i. e. webpack 2.x
 
 # webpack 2.x
 
-webpack 2.x will support moodle. Loaders will get the internal preprocessing format for moodle with webpack.
+webpack 2.x will support concord. Loaders will get the internal preprocessing format for concord with webpack.
