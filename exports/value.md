@@ -1,12 +1,8 @@
-# `{name}`
+# `value`
 
-{description}
+Any value is exported. This can be anything.
 
-## `{export}/{name}`
-
-{description}
-
-### example
+## example
 
 ```
 {example}
@@ -23,16 +19,6 @@
 ### `+{featureName}`
 
 {featureDescription}
-
-| {implementation} |
-|------------------|
-| {version}        |
-
-## exports
-
-### `{exportName}/{name}`
-
-{description}
 
 | {implementation} |
 |------------------|

@@ -1,12 +1,8 @@
-# `{name}`
+# `template-function`
 
-{description}
+A function is exported that returns a string when called. It may expect arguments.
 
-## `{export}/{name}`
-
-{description}
-
-### example
+## example
 
 ```
 {example}
@@ -23,16 +19,6 @@
 ### `+{featureName}`
 
 {featureDescription}
-
-| {implementation} |
-|------------------|
-| {version}        |
-
-## exports
-
-### `{exportName}/{name}`
-
-{description}
 
 | {implementation} |
 |------------------|

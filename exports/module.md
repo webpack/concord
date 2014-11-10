@@ -1,12 +1,8 @@
-# `{name}`
+# `module`
 
-{description}
+A ES6-like module is exported. This means it can have multiple named exports and can have one default export.
 
-## `{export}/{name}`
-
-{description}
-
-### example
+## example
 
 ```
 {example}
@@ -23,16 +19,6 @@
 ### `+{featureName}`
 
 {featureDescription}
-
-| {implementation} |
-|------------------|
-| {version}        |
-
-## exports
-
-### `{exportName}/{name}`
-
-{description}
 
 | {implementation} |
 |------------------|

@@ -1,12 +1,8 @@
-# `{name}`
+# `class`
 
-{description}
+A constructor function is exported. It's only allowed to use it with the `new` keyword.
 
-## `{export}/{name}`
-
-{description}
-
-### example
+## example
 
 ```
 {example}
@@ -23,16 +19,6 @@
 ### `+{featureName}`
 
 {featureDescription}
-
-| {implementation} |
-|------------------|
-| {version}        |
-
-## exports
-
-### `{exportName}/{name}`
-
-{description}
 
 | {implementation} |
 |------------------|

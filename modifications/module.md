@@ -1,15 +1,13 @@
-# `{name}`
+# `module`
 
-{description}
+Coverts a value exporting module in a ES6-like module by moving the exported value into the default export.
 
-## `{export}/{name}`
+## example
 
-{description}
-
-### example
+`abc` is of type `module/text/markdown`.
 
 ```
-{example}
+import theText from "abc";
 ```
 
 ## support
@@ -23,16 +21,6 @@
 ### `+{featureName}`
 
 {featureDescription}
-
-| {implementation} |
-|------------------|
-| {version}        |
-
-## exports
-
-### `{exportName}/{name}`
-
-{description}
 
 | {implementation} |
 |------------------|
