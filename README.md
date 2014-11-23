@@ -88,6 +88,36 @@ var content = "<html><body><img src=\"image.png\"></body></html>";
 * How to alternate the behaviour from the application? (i. e. emit images in separate files instead of inlined)
 
 
+### [duo](https://github.com/duojs/duo)
+
+A package system that supports any `ComponentJS` module as well as, thanks to file-path walking, any `bower` module or module that otherwise has a built `distribution` file committed to the repo, on Github.
+
+A manifestless system wherein module `require`s are recursively crawled to build a dependency tree. Moudles may be CSS or JavaScript files. Dependencies of CSS may be any static file (which are reliably output into the final build), other CSS modules, other types via plugins. Dependencies of JS may be `.js`, `.json`, `.svg`, `.html`, and others. Further, like with CSS, plugins may add support for additional types: `.yaml`, `.coffee`, etc. Plugins may also transform files (e.g. `5to6` to convert ES6 JavaScript into ES5 JavaScript) or inject synthetic files (e.g. allow the application to `require('env')` to access `process.env` etc.).
+
+`duo` is influenced by `Go`, `ComponentJS`, `Browserify`.
+
+#### positive
+
+* Github is the "registry" giving immediate access to most projects.
+* Generally feels like any file can be included in the build through a simple plugin
+* Optional manifest
+* Making plugins feels like a breeze: https://github.com/duojs/duo/wiki/Third-Party-Libraries
+* Powerful CLI, usually avoid creating configuration files altogether! (e.g. use plugins on the CLI)
+
+#### negative
+
+* By changing the `require` API `duo` makes hybrid client/server modules much less feasible? E.g. The module and ALL of its dependencies cannot use ANY of `duo`s fancy `require` syntax lest `node` support be lost?
+* Couples package/module/build system, at least project-wise in face-value, detracting from encapsulated community consensus around each core step. AKA All-in or nothing.
+* Manifests are still desirable for large projects which while possible with `duo` has quirks and is not well documented at all: https://github.com/duojs/duo/issues/374
+* Caching is not perfect leading to frequent frustration: https://github.com/duojs/duo/issues/386
+* documentation is lacking
+* Transformations only work per file, making several types of transformation impossible! https://github.com/duojs/duo/issues/346
+* Still buggy https://github.com/duojs/duo/issues/355
+
+#### open questions
+* What is the story regarding multiple entry-points?
+* modules of static files only intended to be included into the final build appear to be impossible to `require` since there is no Manifest system like componentJS that supports a `files` filed??
+
 
 ### [component](https://github.com/componentjs/component)
 
