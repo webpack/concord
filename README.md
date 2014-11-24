@@ -74,7 +74,7 @@ var content = "<html><body><img src=\"image.png\"></body></html>";
 
 #### negative
 
-* the exact process of preprocessing need to be specified in the code 
+* the exact process of preprocessing need to be specified in the code
   (i. e. `addStylesheet(compileLess(fs.readFileSync(__dirname + "/style.less", "utf-8")))`)
 * the transform need to load and parse each code file to find dependencies.
   Multiple transforms means the code is parsed multiple times. Performance!
@@ -90,11 +90,16 @@ var content = "<html><body><img src=\"image.png\"></body></html>";
 
 ### [duo](https://github.com/duojs/duo)
 
-A package system that supports any `ComponentJS` module as well as, thanks to file-path walking, any `bower` module or module that otherwise has a built `distribution` file committed to the repo, on Github.
+A package system that does *not* require manifest files, that supports any `ComponentJS` module as well as, thanks to file-path walking, any `bower` module or module that otherwise has a built `distribution` file committed to the repo, on Github.
 
-A manifestless system wherein module `require`s are recursively crawled to build a dependency tree. Moudles may be CSS or JavaScript files. Dependencies of CSS may be any static file (which are reliably output into the final build), other CSS modules, other types via plugins. Dependencies of JS may be `.js`, `.json`, `.svg`, `.html`, and others. Further, like with CSS, plugins may add support for additional types: `.yaml`, `.coffee`, etc. Plugins may also transform files (e.g. `5to6` to convert ES6 JavaScript into ES5 JavaScript) or inject synthetic files (e.g. allow the application to `require('env')` to access `process.env` etc.).
+A CommonJS module system wherein each `require`s are recursively crawled to build a dependency tree. Modules may be CSS or JavaScript files. Dependencies of CSS may be: One, any static file (and these will be reliably output into the final build); two, other CSS modules; three, other file types via plugins. Dependencies of JavaScript by default may be many file types: `.js`, `.json`, `.svg`, `.html`, and more. Further, like with CSS, plugins may that add support for additional file types may be used (e.g. `.yaml`, `.coffee`, etc). Plugins may also transform files (e.g. `5to6` to convert ES6 JavaScript into ES5 JavaScript) or inject synthetic files (e.g. allow the application to `require('env')` to access `process.env` etc.).
 
-`duo` is influenced by `Go`, `ComponentJS`, `Browserify`.
+So the `duo` system is really three subsystems:
+- package system
+- module system
+- build system (modular)
+
+The `duo` package system is influenced by `Go`, `ComponentJS`, `Browserify`. The `duo` package system is its main unique feature as compared to other well-known systems.
 
 #### positive
 
@@ -103,6 +108,7 @@ A manifestless system wherein module `require`s are recursively crawled to build
 * Optional manifest
 * Making plugins feels like a breeze: https://github.com/duojs/duo/wiki/Third-Party-Libraries
 * Powerful CLI, usually avoid creating configuration files altogether! (e.g. use plugins on the CLI)
+* Promising project, friendly, open, talented, and comitted core team
 
 #### negative
 
@@ -113,6 +119,7 @@ A manifestless system wherein module `require`s are recursively crawled to build
 * documentation is lacking
 * Transformations only work per file, making several types of transformation impossible! https://github.com/duojs/duo/issues/346
 * Still buggy https://github.com/duojs/duo/issues/355
+* Still young: https://github.com/duojs/duo/issues/395
 
 #### open questions
 * What is the story regarding multiple entry-points?
@@ -156,10 +163,10 @@ var content = require("./file.html");
   * you cannot use the module in node.js as it's installed in a separate folder, but you can publish the same module to both registries
 
 
-  
+
 ### [webpack 1.x](http://webpack.github.io/)
 
-In a pre-app configuration file (webpack.config.js) you configure loaders for files. Modules that use different module types need to tell the app author to add the right loaders to the configuration file. A 
+In a pre-app configuration file (webpack.config.js) you configure loaders for files. Modules that use different module types need to tell the app author to add the right loaders to the configuration file. A
 
 ``` javascript
 // webpack.config.js
