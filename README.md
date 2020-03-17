@@ -1,10 +1,10 @@
 # concord
 
-A spec for modules. concord modules.
+A spec for concord modules.
 
 ## Goals
 
-* Reuseable modules that can be used independent of the build system.
+* Reusable modules that can be used independent of the build system.
 * Allow to use different module types and describe dependencies between them. i. e.
   * code (javascript, coffeescript)
   * data (json, text, yaml)
@@ -46,7 +46,7 @@ A spec for modules. concord modules.
 
 ### [browserify](http://browserify.org/) style modules
 
-browserifys approach is to use only node.js-compatible modules plus code and transform this code for the used environment (here browser).
+browserify's approach is to use only node.js-compatible modules plus code and transform this code for the used environment (here browser).
 
 Example: loading HTML file
 
@@ -368,7 +368,7 @@ The **modification type** explains how the original export is modified.
 
 #### example export types
 
-* `object`: any javascript object (or primive value) is exported
+* `object`: any javascript object (or primitive value) is exported
 * `data`: data (no code: no functions or modified getter/setter)
   * `+immutable`: data will never be changed (allows optimizations like inlining)
 * `template-function`: a function returning a string is exported
